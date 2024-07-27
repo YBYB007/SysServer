@@ -1,8 +1,0 @@
-syntax="proto3";
-
-message person
-{
-    int32 id=1;
-    bytes name =2;
-    int32 age=4;
-}

@@ -1,2 +1,0 @@
-# Hashes of file build rules.
-2af7a4b5d30728134d2dffdb9dbcd968 person.pb.h
