@@ -1,8 +1,8 @@
-#include<iostream>
+#include <iostream>
 
 int main(int argc, char const *argv[])
 {
     /* code */
-    std::cout<<"hello world"<<std::endl;
+    std::cout << "hello world" << std::endl;
     return 0;
 }
