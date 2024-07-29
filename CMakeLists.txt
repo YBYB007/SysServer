@@ -43,5 +43,3 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 # 打印配置信息
 # message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 # message(STATUS "C++ standard: ${CMAKE_CXX_STANDARD}")
-
-SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")

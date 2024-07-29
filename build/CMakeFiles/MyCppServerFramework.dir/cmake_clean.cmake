@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
-  "/root/public/leetcode/SysServer/bin/MyCppServerFramework"
-  "/root/public/leetcode/SysServer/bin/MyCppServerFramework.pdb"
+  "../bin/MyCppServerFramework"
+  "../bin/MyCppServerFramework.pdb"
   "CMakeFiles/MyCppServerFramework.dir/src/main.cpp.o"
-  "CMakeFiles/MyCppServerFramework.dir/src/main.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.
