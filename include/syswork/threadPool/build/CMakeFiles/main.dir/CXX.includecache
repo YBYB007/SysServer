@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/main.cpp
+iostream
+-
+threadPool.cpp
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/threadPool.cpp
+
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/threadPool.cpp
+threadPool.h
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/threadPool.h
+
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/threadPool.h
+thread
+-
+vector
+-
+queue
+-
+memory
+-
+functional
+-
+mutex
+-
+condition_variable
+-
+future
+-
+stdexcept
+-
+

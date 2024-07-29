@@ -1,0 +1,3 @@
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/build/CMakeFiles/rebuild_cache.dir
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/build/CMakeFiles/edit_cache.dir
+/home/yb/Public/vs/SysServer/include/syswork/threadPool/build/CMakeFiles/main.dir
