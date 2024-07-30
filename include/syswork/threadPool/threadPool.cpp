@@ -10,7 +10,8 @@ ThreadPool::ThreadPool(size_t threads) : stop(false) // 初始化 stop 为 false
             [this]
             {
                 // 循环接任务
-                for (;;)
+                for (;;) 
+                
                 {
                     std::function<void()> task;
 
