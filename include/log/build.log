@@ -1,0 +1,4 @@
+2024-08-01 15:24:26 [INFO] [/home/yb/Public/vs/SysServer/include/log/main.cpp:8] Application started.
+            2024-08-01 15:24:26 [WARNING] [/home/yb/Public/vs/SysServer/include/log/main.cpp:9] Memory usage high.
+            2024-08-01 15:24:26 [ERROR] [/home/yb/Public/vs/SysServer/include/log/main.cpp:10] File not found:  example.txt
+            

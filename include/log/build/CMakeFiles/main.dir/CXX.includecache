@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yb/Public/vs/SysServer/include/log/log.h
+iostream
+-
+fstream
+-
+sstream
+-
+iomanip
+-
+mutex
+-
+ctime
+-
+
+/home/yb/Public/vs/SysServer/include/log/main.cpp
+log.h
+/home/yb/Public/vs/SysServer/include/log/log.h
+
