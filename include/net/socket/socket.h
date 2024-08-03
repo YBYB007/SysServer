@@ -24,6 +24,7 @@
 #define SOCKET int // 在 Linux 下套接字描述符是整数。
 #define INVALID_SOCKET (-1) // Linux下文件描述符是从0开始的 -1代表着无效的套接字描述
 #define SOCKET_ERROR (-1) // 套接字操作错误
+#include <netinet/tcp.h>
 
 // 字符串
 #include <cstdint>

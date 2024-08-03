@@ -32,8 +32,7 @@ public:
     static int recvMessageByIPv6(SOCKET fd, const char *IP, const char *port, std::vector<char> &buffer);
 
     // UDP echo服务程序
-    static void udpEcho(SOCKET fd,std::vector<char> &buffer);
-
+    static void udpEcho(SOCKET fd, std::vector<char> &buffer);
 
     // 已连接地址发送
     static int sendMessage(SOCKET fd, std::string message);
@@ -43,22 +42,42 @@ public:
     // 套接字选项设置
     // 地址复用,断开后可以直接重新绑定
     static void setReUseSocketAddr(SOCKET fd);
+    static void SetReusePort(SOCKET fd);
+    // 设置缓冲区大小
+    static void SetSendBufSize(SOCKET fd, int size);
+    static void SetRecvBufSize(SOCKET fd, int size);
+    // 阻塞与非阻塞
+    static void socketNoBlock(SOCKET fd);
+    static void socketBlock(SOCKET fd, int write_timeout);
+    // TCP noNagle算法
+    static void noNage(SOCKET fd);
+    // 保持存活
+    static void setKeepAlive(SOCKET fd);
+    // 无信息终止
+    static void setNoSigpipe(SOCKET fd);
+    // 套接字地址获取
 
-    /*
+    // 获取对方IP用IPv4的格式
+    static std::string getPeerIpv4(SOCKET fd);
+    // 获取对方端口以IPv4的格式
+    static std::string getPeerIPv4Port(SOCKET fd);
+    // 获取对方IP用IPv6的格式
+    static std::string getPeerIpv6(SOCKET fd);
+    // 获取对方IP以IPv6的格式
+    static std::string getPeerIPv6Port(SOCKET fd);
+    // 获取Socket的IP以IPv4的格式
+    static std::string getSocketIpv4(SOCKET fd);
+    // 获取Socket的IP以IPv4的格式
+    static std::string getSocketIpv6(SOCKET fd);
+    // 获取Socket的地址以IPv4的格式
+    static sockaddr_in* getSocketAddrIPv4(SOCKET fd);
+    // 获取对方地址以IPv4的格式
+    static sockaddr_in* getPeerAddrIPv4(SOCKET fd);
+    // 获取Socket的地址以IP6的格式
+    static sockaddr_in6* getSocketAddrIPv6(SOCKET fd);
+    // 获取对方地址以IPv6的格式
+    static sockaddr_in6* getPeerAddrIPv6(SOCKET fd);
 
-static void SetNonBlock(SOCKET fd);
-static void SetBlock(SOCKET fd, int write_timeout = 0);
-static void SetReuseAddr(SOCKET fd);
-static void SetReusePort(SOCKET sockfd);
-static void SetNoDelay(SOCKET sockfd);
-static void SetKeepAlive(SOCKET sockfd);
-static void SetNoSigpipe(SOCKET sockfd);
-static void SetSendBufSize(SOCKET sockfd, int size);
-static void SetRecvBufSize(SOCKET sockfd, int size);
-static std::string GetPeerIp(SOCKET sockfd);
-static std::string GetSocketIp(SOCKET sockfd);
-static int GetSocketAddr(SOCKET sockfd, struct sockaddr_in *addr);
-static uint16_t GetPeerPort(SOCKET sockfd);
-static int GetPeerAddr(SOCKET sockfd, struct sockaddr_in *addr);
-    */
+    static std::string sockaddr_to_string(const sockaddr *addr);
+
 };

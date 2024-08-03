@@ -147,132 +147,195 @@ void socketUtil::setReUseSocketAddr(SOCKET fd)
     }
 }
 
-/*
-
-void socketFuncs::SetNonBlock(SOCKET fd)
-{
-#if defined(__linux) || defined(__linux__)
-    int flags = fcntl(fd, F_GETFL, 0);
-    fcntl(fd, F_SETFL, flags | O_NONBLOCK);
-#else
-    unsigned long on = 1;
-    ioctlsocket(fd, FIONBIO, &on);
-#endif
-}
-
-void socketFuncs::SetBlock(SOCKET fd, int write_timeout)
-{
-#if defined(__linux) || defined(__linux__)
-    int flags = fcntl(fd, F_GETFL, 0);
-    fcntl(fd, F_SETFL, flags & (~O_NONBLOCK));
-#elif defined(WIN32) || defined(_WIN32)
-    unsigned long on = 0;
-    ioctlsocket(fd, FIONBIO, &on);
-#else
-#endif
-    if (write_timeout > 0)
-    {
-#ifdef SO_SNDTIMEO
-#if defined(__linux) || defined(__linux__)
-        struct timeval tv = {write_timeout / 1000, (write_timeout % 1000) * 1000};
-        setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char *)&tv, sizeof tv);
-#elif defined(WIN32) || defined(_WIN32)
-        unsigned long ms = (unsigned long)write_timeout;
-        setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char *)&ms, sizeof(unsigned long));
-#else
-#endif
-#endif
-    }
-}
-
-void socketFuncs::SetReuseAddr(SOCKET sockfd)
-{
-    int on = 1;
-    setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (const char *)&on, sizeof on);
-}
-
-void socketFuncs::SetReusePort(SOCKET sockfd)
+void socketUtil::SetReusePort(SOCKET fd)
 {
 #ifdef SO_REUSEPORT
     int on = 1;
-    setsockopt(sockfd, SOL_SOCKET, SO_REUSEPORT, (const char *)&on, sizeof(on));
+    setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, (const char *)&on, sizeof(on));
 #endif
 }
 
-void socketFuncs::SetNoDelay(SOCKET sockfd)
+void socketUtil::SetSendBufSize(SOCKET fd, int size)
+{
+    setsockopt(fd, SOL_SOCKET, SO_SNDBUF, (char *)&size, sizeof(size));
+}
+
+void socketUtil::SetRecvBufSize(SOCKET fd, int size)
+{
+    setsockopt(fd, SOL_SOCKET, SO_RCVBUF, (char *)&size, sizeof(size));
+}
+
+void socketUtil::socketNoBlock(SOCKET fd)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    fcntl(fd, F_SETFL, flags | O_NONBLOCK);
+}
+
+void socketUtil::socketBlock(SOCKET fd, int write_timeout)
+{
+    int flags = fcntl(fd, F_GETFL, 0);
+    fcntl(fd, F_SETFL, flags & (~O_NONBLOCK));
+    if (write_timeout > 0)
+    {
+        struct timeval tv = {write_timeout / 1000, (write_timeout % 1000) * 1000};
+        setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char *)&tv, sizeof tv);
+    }
+}
+
+void socketUtil::noNage(SOCKET fd)
 {
 #ifdef TCP_NODELAY
     int on = 1;
-    int ret = setsockopt(sockfd, IPPROTO_TCP, TCP_NODELAY, (char *)&on, sizeof(on));
+    int ret = setsockopt(fd, IPPROTO_TCP, TCP_NODELAY, (char *)&on, sizeof(on));
 #endif
 }
 
-void socketFuncs::SetKeepAlive(SOCKET sockfd)
+void socketUtil::setKeepAlive(SOCKET fd)
 {
     int on = 1;
-    setsockopt(sockfd, SOL_SOCKET, SO_KEEPALIVE, (char *)&on, sizeof(on));
+    setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, (char *)&on, sizeof(on));
 }
 
-void socketFuncs::SetNoSigpipe(SOCKET sockfd)
+void socketUtil::setNoSigpipe(SOCKET fd)
 {
-#ifdef SO_NOSIGPIPE
     int on = 1;
-    setsockopt(sockfd, SOL_SOCKET, SO_NOSIGPIPE, (char *)&on, sizeof(on));
-#endif
+    setsockopt(fd, SOL_SOCKET, MSG_NOSIGNAL, (char *)&on, sizeof(on));
 }
 
-void socketFuncs::SetSendBufSize(SOCKET sockfd, int size)
+std::string socketUtil::sockaddr_to_string(const sockaddr *addr)
 {
-    setsockopt(sockfd, SOL_SOCKET, SO_SNDBUF, (char *)&size, sizeof(size));
-}
-
-void socketFuncs::SetRecvBufSize(SOCKET sockfd, int size)
-{
-    setsockopt(sockfd, SOL_SOCKET, SO_RCVBUF, (char *)&size, sizeof(size));
-}
-
-std::string socketFuncs::GetPeerIp(SOCKET sockfd)
-{
-    struct sockaddr_in addr = {0};
-    socklen_t addrlen = sizeof(struct sockaddr_in);
-    if (getpeername(sockfd, (struct sockaddr *)&addr, &addrlen) == 0)
+    char addr_str[INET6_ADDRSTRLEN];
+    if (addr->sa_family == AF_INET)
     {
-        return inet_ntoa(addr.sin_addr);
+        inet_ntop(AF_INET, &(((sockaddr_in *)addr)->sin_addr), addr_str, sizeof(addr_str));
     }
-    return "0.0.0.0";
-}
-
-std::string socketFuncs::GetSocketIp(SOCKET sockfd)
-{
-    struct sockaddr_in addr = {0};
-    char str[INET_ADDRSTRLEN] = "127.0.0.1";
-    if (GetSocketAddr(sockfd, &addr) == 0)
+    else if (addr->sa_family == AF_INET6)
     {
-        inet_ntop(AF_INET, &addr.sin_addr, str, sizeof(str));
+        inet_ntop(AF_INET6, &(((sockaddr_in6 *)addr)->sin6_addr), addr_str, sizeof(addr_str));
     }
-    return str;
+    return std::string(addr_str);
 }
 
-int socketFuncs::GetSocketAddr(SOCKET sockfd, struct sockaddr_in *addr)
+// 获取对方IPv4地址
+std::string socketUtil::getPeerIpv4(SOCKET fd)
 {
-    socklen_t addrlen = sizeof(struct sockaddr_in);
-    return getsockname(sockfd, (struct sockaddr *)addr, &addrlen);
-}
-
-uint16_t socketFuncs::GetPeerPort(SOCKET sockfd)
-{
-    struct sockaddr_in addr = {0};
-    socklen_t addrlen = sizeof(struct sockaddr_in);
-    if (getpeername(sockfd, (struct sockaddr *)&addr, &addrlen) == 0)
+    sockaddr_in addr;
+    socklen_t len = sizeof(addr);
+    if (getpeername(fd, (sockaddr *)&addr, &len) == 0)
     {
-        return ntohs(addr.sin_port);
+        return sockaddr_to_string((sockaddr *)&addr);
     }
-    return 0;
+    return "Error";
 }
 
-int socketFuncs::GetPeerAddr(SOCKET sockfd, struct sockaddr_in *addr)
+// 获取对方IPv4端口
+std::string socketUtil::getPeerIPv4Port(SOCKET fd)
 {
-    socklen_t addrlen = sizeof(struct sockaddr_in);
-    return getpeername(sockfd, (struct sockaddr *)addr, &addrlen);
+    sockaddr_in addr;
+    socklen_t len = sizeof(addr);
+    if (getpeername(fd, (sockaddr *)&addr, &len) == 0)
+    {
+        return std::to_string(ntohs(addr.sin_port));
+    }
+    return "Error";
 }
-*/
+
+// 获取对方IPv6地址
+std::string socketUtil::getPeerIpv6(SOCKET fd)
+{
+    sockaddr_in6 addr;
+    socklen_t len = sizeof(addr);
+    if (getpeername(fd, (sockaddr *)&addr, &len) == 0)
+    {
+        return sockaddr_to_string((sockaddr *)&addr);
+    }
+    return "Error";
+}
+
+// 获取对方IPv6端口
+std::string socketUtil::getPeerIPv6Port(SOCKET fd)
+{
+    sockaddr_in6 addr;
+    socklen_t len = sizeof(addr);
+    if (getpeername(fd, (sockaddr *)&addr, &len) == 0)
+    {
+        return std::to_string(ntohs(addr.sin6_port));
+    }
+    return "Error";
+}
+
+// 获取Socket的IPv4地址
+std::string socketUtil::getSocketIpv4(SOCKET fd)
+{
+    sockaddr_in addr;
+    socklen_t len = sizeof(addr);
+    if (getsockname(fd, (sockaddr *)&addr, &len) == 0)
+    {
+        return sockaddr_to_string((sockaddr *)&addr);
+    }
+    return "Error";
+}
+
+// 获取Socket的IPv6地址
+std::string socketUtil::getSocketIpv6(SOCKET fd)
+{
+    sockaddr_in6 addr;
+    socklen_t len = sizeof(addr);
+    if (getsockname(fd, (sockaddr *)&addr, &len) == 0)
+    {
+        return sockaddr_to_string((sockaddr *)&addr);
+    }
+    return "Error";
+}
+
+// 获取Socket的地址结构体IPv4
+sockaddr_in *socketUtil::getSocketAddrIPv4(SOCKET fd)
+{
+    sockaddr_in *addr = new sockaddr_in;
+    socklen_t len = sizeof(*addr);
+    if (getsockname(fd, (sockaddr *)addr, &len) == 0)
+    {
+        return addr;
+    }
+    delete addr;
+    return nullptr;
+}
+
+// 获取对方地址结构体IPv4
+sockaddr_in *socketUtil::getPeerAddrIPv4(SOCKET fd)
+{
+    sockaddr_in *addr = new sockaddr_in;
+    socklen_t len = sizeof(*addr);
+    if (getpeername(fd, (sockaddr *)addr, &len) == 0)
+    {
+        return addr;
+    }
+    delete addr;
+    return nullptr;
+}
+
+// 获取Socket的地址结构体IPv6
+sockaddr_in6 *socketUtil::getSocketAddrIPv6(SOCKET fd)
+{
+    sockaddr_in6 *addr = new sockaddr_in6;
+    socklen_t len = sizeof(*addr);
+    if (getsockname(fd, (sockaddr *)addr, &len) == 0)
+    {
+        return addr;
+    }
+    delete addr;
+    return nullptr;
+}
+
+// 获取对方地址结构体IPv6
+sockaddr_in6 *socketUtil::getPeerAddrIPv6(SOCKET fd)
+{
+    sockaddr_in6 *addr = new sockaddr_in6;
+    socklen_t len = sizeof(*addr);
+    if (getpeername(fd, (sockaddr *)addr, &len) == 0)
+    {
+        return addr;
+    }
+    delete addr;
+    return nullptr;
+}

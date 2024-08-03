@@ -55,6 +55,8 @@ arpa/inet.h
 -
 net/if.h
 -
+netinet/tcp.h
+-
 cstdint
 -
 cstring
