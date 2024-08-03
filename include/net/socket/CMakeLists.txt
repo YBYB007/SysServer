@@ -8,6 +8,6 @@ project(MyCppServerFramework VERSION 1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(serverTest serverTest.cpp)
-add_executable(clientTest clientTest.cpp)
+add_executable(testServer testServer.cpp)
+add_executable(testClient testClient.cpp)
 

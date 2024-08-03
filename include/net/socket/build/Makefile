@@ -111,84 +111,84 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named clientTest
+# Target rules for targets named testClient
 
 # Build rule for target.
-clientTest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 clientTest
-.PHONY : clientTest
+testClient: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testClient
+.PHONY : testClient
 
 # fast build rule for target.
-clientTest/fast:
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/build
-.PHONY : clientTest/fast
+testClient/fast:
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/build
+.PHONY : testClient/fast
 
 #=============================================================================
-# Target rules for targets named serverTest
+# Target rules for targets named testServer
 
 # Build rule for target.
-serverTest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 serverTest
-.PHONY : serverTest
+testServer: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 testServer
+.PHONY : testServer
 
 # fast build rule for target.
-serverTest/fast:
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/build
-.PHONY : serverTest/fast
+testServer/fast:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/build
+.PHONY : testServer/fast
 
-clientTest.o: clientTest.cpp.o
+testClient.o: testClient.cpp.o
 
-.PHONY : clientTest.o
-
-# target to build an object file
-clientTest.cpp.o:
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/clientTest.cpp.o
-.PHONY : clientTest.cpp.o
-
-clientTest.i: clientTest.cpp.i
-
-.PHONY : clientTest.i
-
-# target to preprocess a source file
-clientTest.cpp.i:
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/clientTest.cpp.i
-.PHONY : clientTest.cpp.i
-
-clientTest.s: clientTest.cpp.s
-
-.PHONY : clientTest.s
-
-# target to generate assembly for a file
-clientTest.cpp.s:
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/clientTest.cpp.s
-.PHONY : clientTest.cpp.s
-
-serverTest.o: serverTest.cpp.o
-
-.PHONY : serverTest.o
+.PHONY : testClient.o
 
 # target to build an object file
-serverTest.cpp.o:
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/serverTest.cpp.o
-.PHONY : serverTest.cpp.o
+testClient.cpp.o:
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/testClient.cpp.o
+.PHONY : testClient.cpp.o
 
-serverTest.i: serverTest.cpp.i
+testClient.i: testClient.cpp.i
 
-.PHONY : serverTest.i
+.PHONY : testClient.i
 
 # target to preprocess a source file
-serverTest.cpp.i:
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/serverTest.cpp.i
-.PHONY : serverTest.cpp.i
+testClient.cpp.i:
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/testClient.cpp.i
+.PHONY : testClient.cpp.i
 
-serverTest.s: serverTest.cpp.s
+testClient.s: testClient.cpp.s
 
-.PHONY : serverTest.s
+.PHONY : testClient.s
 
 # target to generate assembly for a file
-serverTest.cpp.s:
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/serverTest.cpp.s
-.PHONY : serverTest.cpp.s
+testClient.cpp.s:
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/testClient.cpp.s
+.PHONY : testClient.cpp.s
+
+testServer.o: testServer.cpp.o
+
+.PHONY : testServer.o
+
+# target to build an object file
+testServer.cpp.o:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/testServer.cpp.o
+.PHONY : testServer.cpp.o
+
+testServer.i: testServer.cpp.i
+
+.PHONY : testServer.i
+
+# target to preprocess a source file
+testServer.cpp.i:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/testServer.cpp.i
+.PHONY : testServer.cpp.i
+
+testServer.s: testServer.cpp.s
+
+.PHONY : testServer.s
+
+# target to generate assembly for a file
+testServer.cpp.s:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/testServer.cpp.s
+.PHONY : testServer.cpp.s
 
 # Help Target
 help:
@@ -198,14 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... clientTest"
-	@echo "... serverTest"
-	@echo "... clientTest.o"
-	@echo "... clientTest.i"
-	@echo "... clientTest.s"
-	@echo "... serverTest.o"
-	@echo "... serverTest.i"
-	@echo "... serverTest.s"
+	@echo "... testClient"
+	@echo "... testServer"
+	@echo "... testClient.o"
+	@echo "... testClient.i"
+	@echo "... testClient.s"
+	@echo "... testServer.o"
+	@echo "... testServer.i"
+	@echo "... testServer.s"
 .PHONY : help
 
 

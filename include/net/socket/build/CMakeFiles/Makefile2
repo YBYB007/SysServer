@@ -53,8 +53,8 @@ CMAKE_BINARY_DIR = /home/yb/Public/vs/SysServer/include/net/socket/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/clientTest.dir/all
-all: CMakeFiles/serverTest.dir/all
+all: CMakeFiles/testClient.dir/all
+all: CMakeFiles/testServer.dir/all
 
 .PHONY : all
 
@@ -64,64 +64,64 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/clientTest.dir/clean
-clean: CMakeFiles/serverTest.dir/clean
+clean: CMakeFiles/testClient.dir/clean
+clean: CMakeFiles/testServer.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/clientTest.dir
+# Target rules for target CMakeFiles/testClient.dir
 
 # All Build rule for target.
-CMakeFiles/clientTest.dir/all:
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/depend
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles --progress-num=1,2 "Built target clientTest"
-.PHONY : CMakeFiles/clientTest.dir/all
+CMakeFiles/testClient.dir/all:
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/depend
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles --progress-num=1,2 "Built target testClient"
+.PHONY : CMakeFiles/testClient.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/clientTest.dir/rule: cmake_check_build_system
+CMakeFiles/testClient.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/clientTest.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/testClient.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles 0
-.PHONY : CMakeFiles/clientTest.dir/rule
+.PHONY : CMakeFiles/testClient.dir/rule
 
 # Convenience name for target.
-clientTest: CMakeFiles/clientTest.dir/rule
+testClient: CMakeFiles/testClient.dir/rule
 
-.PHONY : clientTest
+.PHONY : testClient
 
 # clean rule for target.
-CMakeFiles/clientTest.dir/clean:
-	$(MAKE) -f CMakeFiles/clientTest.dir/build.make CMakeFiles/clientTest.dir/clean
-.PHONY : CMakeFiles/clientTest.dir/clean
+CMakeFiles/testClient.dir/clean:
+	$(MAKE) -f CMakeFiles/testClient.dir/build.make CMakeFiles/testClient.dir/clean
+.PHONY : CMakeFiles/testClient.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/serverTest.dir
+# Target rules for target CMakeFiles/testServer.dir
 
 # All Build rule for target.
-CMakeFiles/serverTest.dir/all:
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/depend
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles --progress-num=3,4 "Built target serverTest"
-.PHONY : CMakeFiles/serverTest.dir/all
+CMakeFiles/testServer.dir/all:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/depend
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles --progress-num=3,4 "Built target testServer"
+.PHONY : CMakeFiles/testServer.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/serverTest.dir/rule: cmake_check_build_system
+CMakeFiles/testServer.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/serverTest.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/testServer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/yb/Public/vs/SysServer/include/net/socket/build/CMakeFiles 0
-.PHONY : CMakeFiles/serverTest.dir/rule
+.PHONY : CMakeFiles/testServer.dir/rule
 
 # Convenience name for target.
-serverTest: CMakeFiles/serverTest.dir/rule
+testServer: CMakeFiles/testServer.dir/rule
 
-.PHONY : serverTest
+.PHONY : testServer
 
 # clean rule for target.
-CMakeFiles/serverTest.dir/clean:
-	$(MAKE) -f CMakeFiles/serverTest.dir/build.make CMakeFiles/serverTest.dir/clean
-.PHONY : CMakeFiles/serverTest.dir/clean
+CMakeFiles/testServer.dir/clean:
+	$(MAKE) -f CMakeFiles/testServer.dir/build.make CMakeFiles/testServer.dir/clean
+.PHONY : CMakeFiles/testServer.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.
